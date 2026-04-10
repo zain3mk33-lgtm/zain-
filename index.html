@@ -6,74 +6,39 @@
     <title>Hacked By BTR</title>
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: black;
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background-color: black;
             background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
             background-repeat: repeat;
         }
-
         .content {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-            z-index: 1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; font-family: 'Courier New', Courier, monospace;
+            text-align: center; z-index: 1;
         }
-
         img {
-            width: 400px;
-            max-width: 85%;
-            border: 2px solid red;
-            box-shadow: 0 0 30px red;
-            margin-bottom: 20px;
+            width: 400px; max-width: 85%; border: 2px solid red;
+            box-shadow: 0 0 30px red; margin-bottom: 20px;
             animation: pulse 2s infinite ease-in-out;
         }
-
         h1 {
-            color: red;
-            font-size: clamp(30px, 8vw, 60px);
-            margin: 10px 0;
-            text-shadow: 0 0 10px red, 0 0 20px red;
+            color: red; font-size: clamp(30px, 8vw, 60px);
+            margin: 10px 0; text-shadow: 0 0 10px red, 0 0 20px red;
         }
-
         .hacker-text {
-            color: #00ff00;
-            font-size: clamp(18px, 4vw, 25px);
-            text-shadow: 0 0 10px #00ff00;
-            font-weight: bold;
-            margin: 5px 0;
+            color: #00ff00; font-size: clamp(18px, 4vw, 25px);
+            text-shadow: 0 0 10px #00ff00; font-weight: bold; margin: 5px 0;
         }
-
         .discord-line {
-            color: #00ff00;
-            font-size: clamp(16px, 3.5vw, 22px);
-            text-shadow: 0 0 10px #00ff00;
-            margin-top: 10px;
+            color: #00ff00; font-size: clamp(16px, 3.5vw, 22px);
+            text-shadow: 0 0 10px #00ff00; margin-top: 10px;
         }
-
         .discord-line a {
-            color: white; 
-            text-decoration: none;
-            transition: 0.3s;
+            color: white; text-decoration: none; transition: 0.3s;
             text-shadow: 0 0 10px white;
         }
-
-        .discord-line a:hover {
-            color: red;
-            text-shadow: 0 0 20px red;
-        }
-
+        .discord-line a:hover { color: red; text-shadow: 0 0 20px red; }
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -81,19 +46,25 @@
         }
     </style>
 </head>
-<body>
+<body onclick="playAudio()"> <audio id="myAudio" loop>
+        <source src="https://files.catbox.moe/pjetzx.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="content">
         <img src="https://i.postimg.cc/Vs3jJ1PL/IMG-2267.jpg"> 
-        
         <h1>تم زغب السيرفر</h1>
-        
         <p class="hacker-text">Fucked By BTR</p>
-        
         <p class="discord-line">
             GG : <a href="https://discord.gg/AcbMm2y8u" target="_blank">discord.gg/AcbMm2y8u</a>
         </p>
     </div>
+
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
 
 </body>
 </html>
