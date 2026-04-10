@@ -8,37 +8,62 @@
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background-color: black;
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            background-repeat: repeat;
+            font-family: 'Courier New', Courier, monospace;
         }
+
+        /* حاوية تأثير المصفوفة (Matrix) الخلفية */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* خلف المحتوى */
+        }
+
+        /* حاوية المحتوى الرئيسي (النصوص والصورة) */
         .content {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center;
-            justify-content: center; font-family: 'Courier New', Courier, monospace;
-            text-align: center; z-index: 1;
+            justify-content: center; text-align: center;
+            z-index: 1; /* فوق الخلفية المتحركة */
+            pointer-events: none; /* عشان يمديك تضغط على الرابط تحت */
         }
+
+        /* السماح بالتفاعل مع العناصر داخل الـ content */
+        .content * {
+            pointer-events: auto;
+        }
+
         img {
             width: 400px; max-width: 85%; border: 2px solid red;
             box-shadow: 0 0 30px red; margin-bottom: 20px;
             animation: pulse 2s infinite ease-in-out;
+            background-color: black; /* عشان الصورة نفسها ما تشوش على الخلفية */
         }
+
         h1 {
             color: red; font-size: clamp(30px, 8vw, 60px);
             margin: 10px 0; text-shadow: 0 0 10px red, 0 0 20px red;
         }
+
         .hacker-text {
             color: #00ff00; font-size: clamp(18px, 4vw, 25px);
             text-shadow: 0 0 10px #00ff00; font-weight: bold; margin: 5px 0;
         }
+
         .discord-line {
             color: #00ff00; font-size: clamp(16px, 3.5vw, 22px);
             text-shadow: 0 0 10px #00ff00; margin-top: 10px;
         }
+
         .discord-line a {
             color: white; text-decoration: none; transition: 0.3s;
             text-shadow: 0 0 10px white;
         }
+
         .discord-line a:hover { color: red; text-shadow: 0 0 20px red; }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -46,9 +71,13 @@
         }
     </style>
 </head>
-<body onclick="playAudio()"> <audio id="myAudio" loop>
+<body onclick="playAudio()">
+
+    <audio id="myAudio" loop>
         <source src="https://files.catbox.moe/pjetzx.mp3" type="audio/mpeg">
     </audio>
+
+    <canvas id="matrix-canvas"></canvas>
 
     <div class="content">
         <img src="https://i.postimg.cc/Vs3jJ1PL/IMG-2267.jpg"> 
@@ -60,11 +89,33 @@
     </div>
 
     <script>
+        
         function playAudio() {
             var audio = document.getElementById("myAudio");
             audio.play();
         }
-    </script>
 
-</body>
-</html>
+       
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+    
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
