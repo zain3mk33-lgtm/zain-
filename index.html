@@ -89,20 +89,21 @@
     </div>
 
     <script>
-        
+        // كود تشغيل الصوت
         function playAudio() {
             var audio = document.getElementById("myAudio");
             audio.play();
         }
 
-       
+        // كود تأثير المصفوفة (Matrix Effect)
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
+        // تحديد حجم الـ Canvas ليمتد على كامل الشاشة
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-    
+        // الأحرف التي سنستخدمها (خربشة هاك، أحرف يابانية، أرقام)
         const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
         const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const nums = '0123456789';
@@ -117,5 +118,8 @@
         }
 
         function drawMatrix() {
+            // رسم خلفية سوداء شبه شفافة لخلق تأثير تتبع (trail)
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // تحديد لون النص (أخضر فسفوري)
