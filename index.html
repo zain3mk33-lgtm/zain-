@@ -11,35 +11,28 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* حاوية تأثير المصفوفة (Matrix) الخلفية */
+        /* خلفية الماتريكس */
         #matrix-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* خلف المحتوى */
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
         }
 
-        /* حاوية المحتوى الرئيسي (النصوص والصورة) */
         .content {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center;
             justify-content: center; text-align: center;
-            z-index: 1; /* فوق الخلفية المتحركة */
-            pointer-events: none; /* عشان يمديك تضغط على الرابط تحت */
+            z-index: 1; pointer-events: none;
         }
 
-        /* السماح بالتفاعل مع العناصر داخل الـ content */
-        .content * {
-            pointer-events: auto;
-        }
+        .content * { pointer-events: auto; }
 
         img {
             width: 400px; max-width: 85%; border: 2px solid red;
             box-shadow: 0 0 30px red; margin-bottom: 20px;
             animation: pulse 2s infinite ease-in-out;
-            background-color: black; /* عشان الصورة نفسها ما تشوش على الخلفية */
+            background: black;
         }
 
         h1 {
@@ -49,7 +42,7 @@
 
         .hacker-text {
             color: #00ff00; font-size: clamp(18px, 4vw, 25px);
-            text-shadow: 0 0 10px #00ff00; font-weight: bold; margin: 5px 0;
+            text-shadow: 0 0 10px #00ff00; font-weight: bold;
         }
 
         .discord-line {
@@ -58,11 +51,9 @@
         }
 
         .discord-line a {
-            color: white; text-decoration: none; transition: 0.3s;
+            color: white; text-decoration: none; font-weight: bold;
             text-shadow: 0 0 10px white;
         }
-
-        .discord-line a:hover { color: red; text-shadow: 0 0 20px red; }
 
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -89,37 +80,41 @@
     </div>
 
     <script>
-        // كود تشغيل الصوت
+        // تشغيل الصوت عند أول ضغطة
         function playAudio() {
             var audio = document.getElementById("myAudio");
-            audio.play();
+            audio.play().catch(function(error) {
+                console.log("التحميل فشل أو المتصفح منع التشغيل التلقائي");
+            });
         }
 
-        // كود تأثير المصفوفة (Matrix Effect)
+        // كود الماتريكس
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
-
-        // تحديد حجم الـ Canvas ليمتد على كامل الشاشة
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // الأحرف التي سنستخدمها (خربشة هاك، أحرف يابانية، أرقام)
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const alphabet = katakana + latin + nums;
-
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ';
         const fontSize = 16;
         const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
 
-        const drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-
-        function drawMatrix() {
-            // رسم خلفية سوداء شبه شفافة لخلق تأثير تتبع (trail)
+        function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
 
-            // تحديد لون النص (أخضر فسفوري)
+            for (let i = 0; i < drops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
