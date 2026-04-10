@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacked By BTR</title>
     <style>
-        /* إعدادات الخلفية والنجوم */
         body, html {
             margin: 0;
             padding: 0;
@@ -13,12 +12,10 @@
             height: 100%;
             overflow: hidden;
             background-color: black;
-            /* رابط خلفية النجوم */
             background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
             background-repeat: repeat;
         }
 
-        /* حاوية المحتوى وتوسيطه */
         .content {
             position: fixed;
             top: 0;
@@ -29,58 +26,64 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: 'Courier New', Courier, monospace; /* خط الهاك */
+            font-family: 'Courier New', Courier, monospace;
             text-align: center;
             z-index: 1;
         }
 
-        /* تنسيق الصورة مع التوهج الأحمر */
         img {
-            width: 450px;
-            max-width: 90%;
+            width: 400px;
+            max-width: 85%;
             border: 2px solid red;
-            box-shadow: 0 0 30px red, 0 0 10px white;
-            margin-bottom: 25px;
-            border-radius: 5px;
+            box-shadow: 0 0 30px red;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite ease-in-out;
         }
 
-        /* تنسيق النص العربي (توهج أحمر) */
         h1 {
             color: red;
-            font-size: clamp(30px, 8vw, 60px); /* حجم خط مرن للجوال والكمبيوتر */
+            font-size: clamp(30px, 8vw, 60px);
             margin: 10px 0;
-            text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
-            font-weight: bold;
+            text-shadow: 0 0 10px red, 0 0 20px red;
         }
 
-        /* تنسيق النص الإنجليزي (توهج أخضر فسفوري) */
-        p {
+        /* تنسيق سطر الـ GG مع الرابط */
+        .hacker-text {
             color: #00ff00;
             font-size: clamp(18px, 4vw, 25px);
-            margin-top: 5px;
-            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            text-shadow: 0 0 10px #00ff00;
             font-weight: bold;
-            letter-spacing: 1px;
+            text-decoration: none;
         }
 
-        /* حركة بسيطة "تذبذب" للصورة لتعطي طابع تقني */
+        .hacker-text a {
+            color: #00ff00;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .hacker-text a:hover {
+            color: white;
+            text-shadow: 0 0 20px white;
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
-        }
-        img {
-            animation: pulse 2s infinite ease-in-out;
         }
     </style>
 </head>
 <body>
 
     <div class="content">
-        <img src="https://i.postimg.cc/Vs3jJ1PL/IMG-2267.jpg" alt="Hacked"> 
+        <img src="https://i.postimg.cc/Vs3jJ1PL/IMG-2267.jpg"> 
         
         <h1>تم زغب السيرفر</h1>
-        <p>GG : Fucked By BTR</p>
+        
+        <p class="hacker-text">
+            GG : <a href="https://discord.gg/AcbMm2y8u" target="_blank">discord.gg/AcbMm2y8u</a>
+        </p>
     </div>
 
 </body>
